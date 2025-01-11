@@ -66,29 +66,11 @@ Main script for controlling the player's movement and handling game logic.
 - Processes swipe gestures for ball movement.
 - Handles collisions, game-over states, and level transitions.
 
-## Contributing
-
-We welcome contributions to improve Color-Bumb! Here's how you can help:
-
-1. Fork this repository.
-2. Create a new branch for your changes:
-   ```bash
-   git checkout -b feature-name
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Describe your changes"
-   ```
-4. Push your branch:
-   ```bash
-   git push origin feature-name
-   ```
-5. Open a pull request and describe what you've done.
 
 ## Screenshots
 
 ### Gameplay Screenshot
-![Gameplay Screenshot](./Screenshot%202025-01-11%20at%2003.26.32.png)
+![Gameplay Screenshot](./Assets/Image.png)
 
 ## Closing Notes
 
