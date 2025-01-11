@@ -8,8 +8,8 @@ public class CameraFollow : MonoBehaviour
     public float camspeed=6;
     
     void Update()
-    {  if(FindAnyObjectByType<PlayerController>().canMove)
+    {  if(FindAnyObjectByType<PlayerController>().canMove){
         camVel=Vector3.forward*camspeed*Time.deltaTime;
-        transform.position+=Vector3.forward*camspeed*Time.deltaTime;
+        transform.position+=Vector3.forward*camspeed*Time.deltaTime;}
     }
 }

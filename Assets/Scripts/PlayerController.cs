@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
     public bool canMove,gameOver,finish;
     CameraFollow cam;
     Rigidbody rb;
+    GameManager gameManager;
+    public GameObject breakpoint;
   private void Awake()    
     
     {
         rb=GetComponent<Rigidbody>();
         cam=FindAnyObjectByType<CameraFollow>();
+        gameManager=FindAnyObjectByType<GameManager>();
     }
 
     private void Update() {
@@ -34,7 +37,11 @@ public class PlayerController : MonoBehaviour
         { 
          if(Input.GetMouseButtonDown(0))
           {
+            
               canMove=true;
+              Time.timeScale=1;
+              Time.fixedDeltaTime = Time.timeScale * 0.02f;
+              gameManager.RemoveUI();
           }
         }
     }
@@ -47,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if(canMove){
         if(Input.GetMouseButton(0))
         {
+            
           Vector3 vector=lastMousePosition-Input.mousePosition;
           lastMousePosition=Input.mousePosition;
           vector=new Vector3(vector.x,0,vector.y);
@@ -64,16 +72,25 @@ public class PlayerController : MonoBehaviour
     finish=true;
     canMove=false;
    PlayerPrefs.SetInt("Level",PlayerPrefs.GetInt("Level",1)+1);
-   yield return new WaitForSeconds(1);
+   
    SceneManager.LoadScene("Level"+PlayerPrefs.GetInt("Level"));
+   yield return new WaitForSeconds(1);
   }
 
   private void GameOver(){
+    GameObject shatterSphare=Instantiate(breakpoint,transform.position,Quaternion.identity);
+    foreach (Transform o in shatterSphare.transform)
+    {
+        o.GetComponent<Rigidbody>().AddForce(Vector3.forward*rb.velocity.magnitude,ForceMode.Impulse);
+    }
    canMove=false;
    gameOver=true;
    
     GetComponent<MeshRenderer>().enabled=false;
     GetComponent<Collider>().enabled=false;
+    transform.GetChild(0).GetComponent<TrailRenderer>().enabled = false;
+    Time.timeScale=0.5f;
+    Time.fixedDeltaTime = Time.timeScale * 0.02f;
   }
  
  
